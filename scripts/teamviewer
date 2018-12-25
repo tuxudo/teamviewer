@@ -1,0 +1,121 @@
+#!/usr/bin/python
+
+import os
+import subprocess
+import sys
+import plistlib
+import re
+import glob
+sys.path.insert(0, '/usr/local/munki')
+
+from munkilib import FoundationPlist
+
+def get_prefs():
+                
+    if os.path.isfile('/Library/Preferences/com.teamviewer.teamviewer.preferences.plist'):
+        prefs = "/Library/Preferences/com.teamviewer.teamviewer.preferences.plist" + "\n"
+    else:
+        prefs = ""
+                
+    # Get all users' home folders
+    cmd = ['dscl', '.', '-readall', '/Users', 'NFSHomeDirectory']
+    proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    (output, unused_error) = proc.communicate()
+    
+    # Get user prefs
+    for user in output.split('\n'):
+        if 'NFSHomeDirectory' in user and '/var/empty' not in user:
+            userpath = user.replace("NFSHomeDirectory: ", "")+'/Library/Preferences/com.teamviewer.teamviewer.preferences.Machine.plist'
+            if os.path.isfile(userpath):
+                prefs = userpath + "\n" + prefs 
+                    
+    return prefs[:-1]
+    
+def process_prefs(prefs):
+        
+    out = []
+    for pref in prefs.split('\n'):
+        # Skip malformed plists
+        try:
+            pl = FoundationPlist.readPlist(pref)
+        except:
+            continue
+        preffile ={'ClientID':''}
+        for item in pl:
+            preffile['prefpath'] = pref
+            if item == 'Always_Online':
+                preffile['always_online'] = pl[item]
+            elif item == 'AutoUpdateMode':
+                preffile['autoupdatemode'] = pl[item]
+            elif item == 'ClientID':
+                preffile['clientid'] = pl[item]
+            elif item == 'LastMACUsed':
+                macaddress = ""
+                for address in pl[item]:
+                    macaddress = macaddress + address + "\n"
+                preffile['lastmacused'] = macaddress[:-1]
+            elif item == 'UpdateVersion':
+                versionupdate = ""
+                for update in pl[item]:
+                    versionupdate = versionupdate + update + "\n"
+                preffile['updateversion'] = versionupdate[:-1]
+            elif item == 'Had_a_commercial_Connection':
+                preffile['had_a_commercial_connection'] = pl[item]
+            elif item == 'IPC_Port_Service':
+                preffile['ipc_port_service'] = pl[item]
+            elif item == 'LicenseType':
+                preffile['licensetype'] = pl[item]
+            elif item == 'MIDVersion':
+                preffile['midversion'] = pl[item]
+            elif item == 'MoveRestriction':
+                preffile['moverestriction'] = pl[item]
+            elif item == 'Security_Adminrights':
+                preffile['security_adminrights'] = pl[item]
+            elif item == 'Security_PasswordStrength':
+                preffile['security_passwordstrength'] = pl[item]
+            elif item == 'SendAlwaysCrashLogReport':
+                preffile['sendalwayscrashlogreport'] = pl[item]
+            elif item == 'Version':
+                preffile['version'] = pl[item]
+            elif item == 'ClientWindow_Mode':
+                preffile['clientwindow_mode'] = pl[item]
+            elif item == 'Is_Not_First_Run_Without_Connection':
+                preffile['is_not_first_run_without_connection'] = pl[item]
+            elif item == 'Is_Not_Running_Test_Connection':
+                preffile['is_not_running_test_connection'] = pl[item]
+            elif item == 'Meeting_UserName':
+                preffile['meeting_username'] = pl[item]
+            elif item == 'ClientIC':
+                preffile['clientic'] = pl[item]
+            elif item == 'Update_Available':
+                preffile['update_available'] = pl[item]
+                                
+        out.append(preffile)
+    return out
+
+def main():
+    """Main"""
+    # Create cache dir if it does not exist
+    cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
+    if not os.path.exists(cachedir):
+        os.makedirs(cachedir)
+
+    # Skip manual check
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'manualcheck':
+            print 'Manual check: skipping'
+            exit(0)
+
+    # Get information about the TeamViewer prefs
+    prefs = get_prefs()
+    result = process_prefs(prefs)
+    
+    # Write TeamViewer results to cache
+    output_plist = os.path.join(cachedir, 'teamviewer.plist')
+    plistlib.writePlist(result, output_plist)
+    #print plistlib.writePlistToString(result)
+
+if __name__ == "__main__":
+    main()
