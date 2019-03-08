@@ -1,7 +1,7 @@
 TeamViewer Module
 ==============
 
-Collects data about the TeamView instance on the client and provides a link to connect to it in the client tab. Requires TeamViewer 10 or higher to be installed and configured on the client.
+Collects data about the TeamView instance on the client and provides a link to connect to it in the client tab and listing. Requires TeamViewer 10 or higher to be installed and configured on the client.
 
 Table Schema
 ----
