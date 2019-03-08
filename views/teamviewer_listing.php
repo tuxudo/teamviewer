@@ -12,7 +12,7 @@ new Teamviewer_model;
 
   	<div class="col-lg-12">
 
-		  <h3><span data-i18n="teamviewer.report"></span> <span id="total-count" class='label label-primary'>…</span></h3>
+		  <h3><span data-i18n="teamviewer.reporttitle"></span> <span id="total-count" class='label label-primary'>…</span></h3>
 		  <table class="table table-striped table-condensed table-bordered">
 		    <thead>
 		      <tr>
