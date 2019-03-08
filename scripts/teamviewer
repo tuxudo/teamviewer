@@ -36,21 +36,27 @@ def get_prefs():
 def process_prefs(prefs):
         
     out = []
+    clientids = ""
     for pref in prefs.split('\n'):
         # Skip malformed plists
         try:
             pl = FoundationPlist.readPlist(pref)
         except:
             continue
-        preffile ={'ClientID':''}
+        preffile ={}
         for item in pl:
             preffile['prefpath'] = pref
-            if item == 'Always_Online':
+            if item == 'ClientID':
+                # Only save the entry if ClientID is different
+                if pl[item] in clientids:
+                    continue
+                else:
+                    preffile['clientid'] = pl[item]
+                    clientids = pl[item] + " " + clientids
+            elif item == 'Always_Online':
                 preffile['always_online'] = pl[item]
             elif item == 'AutoUpdateMode':
                 preffile['autoupdatemode'] = pl[item]
-            elif item == 'ClientID':
-                preffile['clientid'] = pl[item]
             elif item == 'LastMACUsed':
                 macaddress = ""
                 for address in pl[item]:
@@ -108,14 +114,18 @@ def main():
             print 'Manual check: skipping'
             exit(0)
 
+    # Set the encoding
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    
     # Get information about the TeamViewer prefs
     prefs = get_prefs()
     result = process_prefs(prefs)
     
     # Write TeamViewer results to cache
     output_plist = os.path.join(cachedir, 'teamviewer.plist')
-    plistlib.writePlist(result, output_plist)
-    #print plistlib.writePlistToString(result)
+    FoundationPlist.writePlist(result, output_plist)
+    #print FoundationPlist.writePlistToString(result)
 
 if __name__ == "__main__":
     main()
