@@ -48,11 +48,11 @@ def process_prefs(prefs):
             preffile['prefpath'] = pref
             if item == 'ClientID':
                 # Only save the entry if ClientID is different
-                if pl[item] in clientids:
+                if str(pl[item]) in clientids:
                     continue
                 else:
                     preffile['clientid'] = pl[item]
-                    clientids = pl[item] + " " + clientids
+                    clientids = str(pl[item]) + " " + clientids
             elif item == 'Always_Online':
                 preffile['always_online'] = pl[item]
             elif item == 'AutoUpdateMode':
