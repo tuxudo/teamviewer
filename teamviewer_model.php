@@ -7,7 +7,7 @@ class Teamviewer_model extends \Model
     public function __construct($serial='')
     {
         parent::__construct('id', 'teamviewer'); //primary key, tablename
-        $this->rs['id'] = 0;
+        $this->rs['id'] = "";
         $this->rs['serial_number'] = $serial;
         $this->rs['always_online'] = 0; // True/False
         $this->rs['autoupdatemode'] = 0;
