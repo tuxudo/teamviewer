@@ -3,6 +3,13 @@ TeamViewer Module
 
 Collects data about the TeamView instance on the client and provides a link to connect to it in the client tab and listing. Requires TeamViewer 10 or higher to be installed and configured on the client.
 
+Configuration
+----
+
+TeamViewer module has one settings that can be managed by adding them to the server environment variables or the .env file. 
+
+TEAMVIEWER_LINK="tvcontrol1://control?device="
+
 Table Schema
 ----
 
