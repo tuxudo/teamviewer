@@ -5,9 +5,9 @@
 
 <script>
 $(document).on('appReady', function(e, lang) {
-	
-	// Get teamviewer data
-	$.getJSON( appUrl + '/module/teamviewer/get_data/' + serialNumber, function( data ) {
+
+    // Get teamviewer data
+    $.getJSON( appUrl + '/module/teamviewer/get_data/' + serialNumber, function( data ) {
 
         // Check if we have data
         if( data == "" || ! data){
@@ -49,7 +49,7 @@ $(document).on('appReady', function(e, lang) {
 
                         } else {
                             rows = rows + '<tr><th>'+i18n.t('teamviewer.'+prop)+'</th><td>'+d[prop]+'</td></tr>';
-                        }    
+                        }
                     }
                 }
 
@@ -66,6 +66,6 @@ $(document).on('appReady', function(e, lang) {
                                 .append(rows))))
             })
         }
-	});
+    });
 });
 </script>
