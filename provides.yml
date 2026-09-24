@@ -1,0 +1,26 @@
+client_tabs:
+    teamviewer-tab:
+        view: teamviewer_tab
+        i18n: teamviewer.teamviewer
+
+listings:
+    teamviewer:
+        view: teamviewer_listing
+        i18n: teamviewer.teamviewer
+
+reports:
+    teamviewer:
+        view: teamviewer_report
+        i18n: teamviewer.report
+
+widgets:
+    teamviewer_update_available:
+        view: teamviewer_update_available_widget
+    teamviewer_management:
+        view: teamviewer_management_widget
+    teamviewer_always_online:
+        view: teamviewer_always_online_widget
+    teamviewer_password_strength:
+        view: teamviewer_password_strength_widget
+    teamviewer_version_graph:
+        view: teamviewer_version_graph_widget

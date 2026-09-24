@@ -1,0 +1,59 @@
+i18n_title: teamviewer.reporttitle
+js_link: module/teamviewer/js/teamviewer
+not_null_column: teamviewer.clientid
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: teamviewer-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - column: reportdata.long_username
+    i18n_header: username
+  - column: teamviewer.clientid
+    i18n_header: teamviewer.clientid
+    formatter: formatTeamviewerClientId
+  - column: teamviewer.version
+    i18n_header: teamviewer.version
+    formatter: formatTeamviewerVersion
+  - column: teamviewer.version
+    i18n_header: teamviewer.edition
+    formatter: formatTeamviewerEdition
+  - column: teamviewer.update_available
+    i18n_header: teamviewer.update_available
+    formatter: formatTeamviewerUpdateAvailable
+    filter: teamviewer_update_available_filter
+  - column: teamviewer.updateversion
+    i18n_header: teamviewer.updateversion
+    formatter: formatTeamviewerUpdateVersion
+  - column: teamviewer.unmanaged
+    i18n_header: teamviewer.unmanaged
+    formatter: formatTeamviewerManagement
+    filter: teamviewer_management_filter
+  - column: teamviewer.owning_manager_account_name
+    i18n_header: teamviewer.owning_manager_account_name
+  - column: teamviewer.owning_manager_company_name
+    i18n_header: teamviewer.owning_manager_company_name
+  - column: teamviewer.buddy_login_name
+    i18n_header: teamviewer.buddy_login_name
+  - column: teamviewer.buddy_display_name
+    i18n_header: teamviewer.buddy_display_name
+  - column: teamviewer.ui_version
+    i18n_header: teamviewer.interface
+    formatter: formatTeamviewerInterface
+  - column: teamviewer.always_online
+    i18n_header: teamviewer.always_online
+    formatter: formatTeamviewerAlwaysOnline
+    filter: teamviewer_always_online_filter
+  - column: teamviewer.autoupdatemode
+    i18n_header: teamviewer.autoupdatemode
+  - column: teamviewer.security_adminrights
+    i18n_header: teamviewer.security_adminrights
+    formatter: formatTeamviewerAdminRights
+  - column: teamviewer.security_passwordstrength
+    i18n_header: teamviewer.security_passwordstrength
+    formatter: formatTeamviewerPasswordStrength
+    filter: teamviewer_password_strength_filter
+  - column: teamviewer.had_a_commercial_connection
+    i18n_header: teamviewer.had_a_commercial_connection
+    formatter: formatTeamviewerCommercial
