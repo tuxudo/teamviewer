@@ -1,0 +1,9 @@
+type: bargraph
+widget_id: teamviewer-version-graph-widget
+api_url: /module/teamviewer/get_version_stats
+i18n_title: teamviewer.widget_version_title
+i18n_tooltip: teamviewer.widget_version_tooltip
+icon: fa-laptop-code
+listing_link: /show/listing/teamviewer/teamviewer
+search_component: e.data.label
+margin: { left: 100 }

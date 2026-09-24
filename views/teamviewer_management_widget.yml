@@ -1,0 +1,16 @@
+type: button
+widget_id: teamviewer-management-widget
+api_url: /module/teamviewer/get_management_stats
+i18n_title: teamviewer.widget_management_title
+i18n_tooltip: teamviewer.widget_management_tooltip
+listing_link: /show/listing/teamviewer/teamviewer
+icon: fa-building
+buttons:
+  - label: unmanaged
+    i18n_label: teamviewer.unmanaged_state
+    class: btn-warning
+    search_component: teamviewer_unmanaged
+  - label: managed
+    i18n_label: teamviewer.managed_state
+    class: btn-success
+    search_component: teamviewer_managed

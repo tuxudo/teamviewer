@@ -1,0 +1,16 @@
+type: button
+widget_id: teamviewer-always-online-widget
+api_url: /module/teamviewer/get_always_online_stats
+i18n_title: teamviewer.widget_always_online_title
+i18n_tooltip: teamviewer.widget_always_online_tooltip
+listing_link: /show/listing/teamviewer/teamviewer
+icon: fa-plug
+buttons:
+  - label: yes
+    i18n_label: yes
+    class: btn-warning
+    search_component: teamviewer_always_online_yes
+  - label: no
+    i18n_label: no
+    class: btn-success
+    search_component: teamviewer_always_online_no

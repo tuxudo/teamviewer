@@ -1,0 +1,16 @@
+type: button
+widget_id: teamviewer-update-available-widget
+api_url: /module/teamviewer/get_update_available_stats
+i18n_title: teamviewer.widget_update_available_title
+i18n_tooltip: teamviewer.widget_update_available_tooltip
+listing_link: /show/listing/teamviewer/teamviewer
+icon: fa-download
+buttons:
+  - label: yes
+    i18n_label: yes
+    class: btn-danger
+    search_component: teamviewer_update_yes
+  - label: no
+    i18n_label: no
+    class: btn-success
+    search_component: teamviewer_update_no
